@@ -1,14 +1,19 @@
 using UnityEngine;
-
+//this is all to make sure that the bullet works as intended, triggeres when hitting an object and also returns when done
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed;
-    private bool hit;
-    private BoxCollider2D boxCollider;
-    private Animator anim;
     private float direction;
-    //this will make sure it dosent keep flying away forever
+    private bool hit;
     private float lifetime;
+    private BoxCollider2D boxCollider;
+    //keep the anim at the bottom as I think one of the issues might have been caused by it being at the top
+    private Animator anim;
+    
+    //this will make sure it dosent keep flying away forever
+    //it dosent seem to work so aditional testing is needed. ask teacher for opinion on it as cant seem to find problem and 
+    //wary about googling too much or using chatgbt to ask for what the possible error is
+    
 
     private void Awake()
     {
@@ -34,15 +39,15 @@ public class Projectile : MonoBehaviour
     {
         lifetime = 0;
         direction = _direction;
-        gameObject.SetActive(true);
         hit = false;
+        gameObject.SetActive(true);
         boxCollider.enabled = true;
         float localScaleX = transform.localScale.x;
         if (Mathf.Sign(localScaleX) != _direction)
             localScaleX = -localScaleX;
             transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
     }
-    //deactivates the fireball after the explosion animation has finished
+    //deactivates the bullet after the hit animation has finished so that it dosent keep going
     private void Deactivate()
     {
         gameObject.SetActive(false);

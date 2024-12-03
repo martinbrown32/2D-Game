@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//this will allow the camera to follow the player into new rooms and understand that a new room has been entered
 public class CameraControll : MonoBehaviour
 {
     [SerializeField] private float speed;
